@@ -21,7 +21,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-sys.path.insert(0, os.environ.get("AGENT_CONFORMANCE", str(Path(__file__).resolve().parents[2] / "conformance" / "validators")))
+_conf = os.environ.get("AGENT_CONFORMANCE", str(Path(__file__).resolve().parents[2] / "conformance"))
+sys.path.insert(0, os.path.join(_conf, "validators"))
 import card_validate  # noqa: E402  (from agent-conformance checkout)
 
 CID = re.compile(r"^sha256:[a-f0-9]{64}$")
